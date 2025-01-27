@@ -1,0 +1,106 @@
+.container{
+    display: flex;
+    padding: 50px 5%;
+    justify-content: space-between;
+    align-items: end;
+    background-image: url(/footerBG.png);
+    height: 194px;
+    width: 100vw;
+    color: var(--background);
+    position: relative;
+    margin-top: 150px;
+}
+
+.left{
+    display: flex;
+    gap: 80px;
+}
+
+.left li{
+    color: var(--background);
+    font-weight: bold;
+    font-size: var(--textNormal);
+    list-style-type: none;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.star{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.star > .tiny{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    animation: spinAndMove 10s infinite linear;
+}
+.star > .big{
+    animation: verticalMove 7s infinite linear;
+}
+
+.item{
+    min-width: 140px;
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    cursor: none;
+    transition: 0.2s cubic-bezier(0.8, 0, 0.2, 1);
+}
+.item:hover{
+    gap: 10px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 26px;
+}
+
+.social{
+    display: flex;
+    gap: 15px;
+}
+.social .icon{
+    cursor: none;
+} 
+
+@keyframes verticalMove {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes spinAndMove {
+    0% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    20% {
+      transform: translateY(-5px) rotate(0deg); /* ขยับขึ้น */
+    }
+    40% {
+      transform: translateY(0px) rotate(0deg); /* ขยับลง */
+    }
+    50% {
+      transform: translateY(5px) rotate(180deg); /* หมุน 180 องศาครั้งที่ 1 */
+    }
+    60% {
+      transform: translateY(0px) rotate(180deg); /* ค้างองศาไว้ */
+    }
+    80% {
+      transform: translateY(-5px) rotate(180deg); /* ขยับขึ้นที่องศาเดิม */
+    }
+    100% {
+      transform: translateY(0px) rotate(360deg); /* หมุน 180 องศาครั้งที่ 2 */
+    }
+  }

@@ -1,0 +1,80 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --mainColor: #8F81DD;
+  --mainColor2: #C5BAFF;
+  --subColor: #C4D9FF;
+  --subColor2: #E8F9FF;
+  --gradientColor: linear-gradient(0deg, rgba(197,186,255,1) 0%, rgba(196,217,255,1) 50%, rgba(232,249,255,1) 100%);
+
+  --textGray: #777777;
+
+  --textMain: 36px;
+  --textSub: 24px;
+  --textNormal: 16px;
+  --textSmall:10px
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.mouse-cursor{
+  position: fixed;
+  z-index: 9999;
+}
+.custom-cursor {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(
+    to right,
+    rgba(197, 186, 255, 1) 0%, 
+    rgba(196, 217, 255, 1) 50%, 
+    rgba(232, 249, 255, 1) 100%
+  );
+  border-radius: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-cursor.hovered {
+  background: linear-gradient(
+    to right,
+    rgba(197, 186, 255, 0.3) 0%, 
+    rgba(196, 217, 255, 0.3) 50%, 
+    rgba(232, 249, 255, 0.3) 100%
+  );
+  transform: translate(-50%, -50%) scale(1.8); /* ขยายขนาดเมื่อ hover */
+}
+
+.custom-cursor-svg {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translate(-50%,-50%);
+  z-index: 9998;
+  pointer-events: none;
+}
+
+body{
+  cursor: none;
+  min-height: 100vh;
+}
