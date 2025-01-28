@@ -190,7 +190,7 @@
         transition: all 0.5s cubic-bezier(0.8, 0, 0.2, 1);
     }
     .side_menu li:hover .bar{
-        width: 250px;
+        width: 45%;
         height: 10px;
         background: linear-gradient(28deg, rgba(197,186,255,1) 0%, rgba(196,217,255,1) 50%, rgba(232,249,255,1) 100%);
         border-radius: 1000px;
@@ -200,11 +200,10 @@
 
 /* Mobile SCREEN */
 @media (max-width: 480px){
-    .container{
-        padding: 15px 5%;
-    }
-
     .menu{
         display: none;
+    }
+    .container{
+        width: 100vw;
     }
 }

@@ -104,3 +104,34 @@
       transform: translateY(0px) rotate(360deg); /* หมุน 180 องศาครั้งที่ 2 */
     }
   }
+
+/* Taplet SCREEN */
+@media (max-width: 768px){
+  .container{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    height: 300px;
+    background-image: url(/Footer_Mobile.png);
+  }
+  .right{
+    align-items: center;
+  }
+  .right .social{
+    gap: 30px;
+  }
+  .star{
+    display: none;
+  }
+}
+
+/* Mobile SCREEN */
+@media (max-width: 480px){
+  .left{
+    gap: 10px;
+  }
+  .left .item{
+    min-width: 120px;
+  }
+}

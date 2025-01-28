@@ -84,8 +84,11 @@ export default function Home() {
       <div className={styles.hero}>
         <img ref={logoRef} className={`${logoVisibile ? styles.fadeIn : ''}`} src="/LogoWhite.png" />
         <div ref={heroText1Ref} className={`${styles.bar} ${styles.delay1} ${heroText1Visible ? styles.fadeIn : ''}`}></div>
-        <div ref={heroText2Ref} className={`${styles.text} ${styles.delay2} ${heroText2Visible ? styles.fadeIn : ''}`}><p>"Transforming ideas into captivating artwork</p>
+        <div ref={heroText2Ref} className={`${styles.text} ${styles.delay2} ${heroText2Visible ? styles.fadeIn : ''}`}>
+        <p>"Transforming ideas into captivating artwork</p>
         <p>Let’s bring your vision to life!"</p></div>
+        <div ref={heroText2Ref} className={`${styles.text2} ${styles.delay2} ${heroText2Visible ? styles.fadeIn : ''}`}>
+        <p>"Transforming ideas into captivating artwork Let’s bring your vision to life!"</p></div>
       </div>
 
       <ImageSlider />
