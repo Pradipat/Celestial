@@ -37,12 +37,12 @@ export default function Home() {
       const offsetX = (innerWidth / 2 - clientX) * 0.025;
       const offsetY = (innerHeight / 2 - clientY) * 0.025;
 
-      const boundedOffsetX = Math.min(Math.max(offsetX, -100), 100);
-      const boundedOffsetY = Math.min(Math.max(offsetY, -100), 100);
+      const offsetXreverse = (clientX - innerWidth / 2) * 0.025;
+      const offsetYreverse = (clientY - innerHeight / 2) * 0.025;
   
-      setBlob1Pos({ x: offsetX, y: offsetY });
-      setBlob2Pos({ x: offsetX, y: offsetY });
-      setBlob3Pos({ x: offsetX, y: offsetY });
+      setBlob1Pos({ x: offsetX , y: offsetY });
+      setBlob2Pos({ x: offsetXreverse * 0.2, y: offsetYreverse * 0.2 });
+      setBlob3Pos({ x: offsetX * 0.4, y: offsetY * 0.4 });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -119,7 +119,7 @@ export default function Home() {
         <div className={`${styles.content} ${styles.right}`}>
           <div className={styles.imageContainer}>
             <div className={styles.image}><img src="/heroImg.png" /></div>
-            <img className={styles.imageBG} src="/blob2.png" />
+            <img className={styles.imageBG} style={{transform : `translate(${blob2Pos.x}px, ${blob2Pos.y}px)`}} src="/blob2.png" />
           </div>
           <div className={styles.textContainer}>
             <div className={styles.top}>
@@ -139,7 +139,7 @@ export default function Home() {
         <div className={`${styles.content} ${styles.left}`}>
           <div className={styles.imageContainer}>
             <div className={styles.image}><img src="/heroImg.png" /></div>
-            <img className={styles.imageBG} src="/blob3.png" />
+            <img className={styles.imageBG} style={{transform :`translate(${blob3Pos.x}px, ${blob3Pos.y}px)`}} src="/blob3.png" />
           </div>
           <div className={styles.textContainer}>
             <div className={styles.top}>
