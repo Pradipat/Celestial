@@ -2,7 +2,6 @@
 
 import { Arimo } from 'next/font/google'
 import './globals.css'
-import { useState } from 'react';
 import { HoverProvider } from '@/contexts/HoverContext';
 
 import Header from './_components/header'

@@ -3,13 +3,23 @@
 import { useHover } from "@/contexts/HoverContext";
 import styles from './home.module.css'
 import ImageSlider from "@/components/ImageSlider";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const { setIsHovered } = useHover();
-  const [ isAnimating, setIsAnimating ] = useState(false);
+  
   const [contactHovered, setContactHovered] = useState(false);
+  const [logoVisibile, setLogoVisible] = useState(false);
+  const [heroText1Visible, setHeroText1Visible] = useState(false);
+  const [heroText2Visible, setHeroText2Visible] = useState(false);
+  const [blob1Pos, setBlob1Pos] = useState({ x: 0, y: 0 });
+  const [blob2Pos, setBlob2Pos] = useState({ x: 0, y: 0 });
+  const [blob3Pos, setBlob3Pos] = useState({ x: 0, y: 0 });
+
   const contactRef = useRef(null);
+  const logoRef = useRef(null);
+  const heroText1Ref = useRef(null);
+  const heroText2Ref = useRef(null);
 
   const handleMouseEnter = () => {
     setContactHovered(true); 
@@ -19,16 +29,62 @@ export default function Home() {
     setContactHovered(false); 
   };
 
-  const handleAnimationEnd = () => {
-    setIsAnimating(false); 
-  };
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+  
+      const offsetX = (innerWidth / 2 - clientX) * 0.025;
+      const offsetY = (innerHeight / 2 - clientY) * 0.025;
+
+      const boundedOffsetX = Math.min(Math.max(offsetX, -100), 100);
+      const boundedOffsetY = Math.min(Math.max(offsetY, -100), 100);
+  
+      setBlob1Pos({ x: offsetX, y: offsetY });
+      setBlob2Pos({ x: offsetX, y: offsetY });
+      setBlob3Pos({ x: offsetX, y: offsetY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  },[]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === logoRef.current && !logoVisibile){
+            setLogoVisible(true);
+          }
+          if (entry.target === heroText1Ref.current && !heroText1Visible){
+            setHeroText1Visible(true);
+          }
+          if (entry.target === heroText2Ref.current && !heroText2Visible){
+            setHeroText2Visible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (logoRef.current) observer.observe(logoRef.current)
+    if (heroText1Ref.current) observer.observe(heroText1Ref.current)
+    if (heroText2Ref.current) observer.observe(heroText2Ref.current)
+
+    return () => {
+      if (logoRef.current) observer.unobserve(logoRef.current)
+      if (heroText1Ref.current) observer.unobserve(heroText1Ref.current)
+      if (heroText2Ref.current) observer.unobserve(heroText2Ref.current)
+    }
+  }, []);
+
 
   return (
     <>
       <div className={styles.hero}>
-        <img src="/LogoWhite.png" />
-        <div className={styles.bar}></div>
-        <div className={styles.text}><p>"Transforming ideas into captivating artwork</p>
+        <img ref={logoRef} className={`${logoVisibile ? styles.fadeIn : ''}`} src="/LogoWhite.png" />
+        <div ref={heroText1Ref} className={`${styles.bar} ${styles.delay1} ${heroText1Visible ? styles.fadeIn : ''}`}></div>
+        <div ref={heroText2Ref} className={`${styles.text} ${styles.delay2} ${heroText2Visible ? styles.fadeIn : ''}`}><p>"Transforming ideas into captivating artwork</p>
         <p>Let’s bring your vision to life!"</p></div>
       </div>
 
@@ -43,7 +99,7 @@ export default function Home() {
         <div className={`${styles.content} ${styles.left}`}>
           <div className={styles.imageContainer}>
             <div className={styles.image}><img src="/heroImg.png" /></div>
-            <img className={styles.imageBG} src="/blob1.png" />
+            <img className={styles.imageBG} style={{transform :`translate(${blob1Pos.x}px, ${blob1Pos.y}px)`}} src="/blob1.png" />
           </div>
           <div className={styles.textContainer}>
             <div className={styles.top}>
@@ -102,7 +158,7 @@ export default function Home() {
 
       </div>
 
-      <div ref={contactRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onAnimationEnd={handleAnimationEnd}
+      <div ref={contactRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
       className={`${styles.contact} ${contactHovered ? styles.slideIn : styles.slideOut}`}>
         <span>CONTACT</span>
         <svg className={styles.contactArrow} width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">

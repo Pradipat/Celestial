@@ -26,12 +26,12 @@ function ImageSlider() {
 
               setTimeout(() => {
                 setIsLoaded(true);
-            }, 200); 
+            }, 100); 
         }
     }, []);
 
   return (
-    <div className={`${styles.imgSliderContainer} ${isLoaded ? styles.fadeIn : ''}`}>
+    <div className={`${styles.imgSliderContainer} ${styles.delay3} ${isLoaded ? styles.fadeIn : ''}`}>
         <div className={styles.border}></div>
         <div className={styles.imgSlider} ref={sliderRef}>
           <img onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} src="/heroImg.png"/>
