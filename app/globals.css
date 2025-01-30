@@ -10,7 +10,8 @@
 
   --textGray: #777777;
 
-  --textMain: 36px;
+  --textMain: 48px;
+  --textMain2: 28px;
   --textSub: 24px;
   --textNormal: 16px;
   --textSmall:10px
@@ -67,9 +68,14 @@
   pointer-events: none;
 }
 
+
 html,body{
   cursor: none;
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
+}
+
+Link{
+  text-decoration: none;
 }

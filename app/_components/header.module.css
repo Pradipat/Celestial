@@ -26,7 +26,7 @@
     gap: 50px;
 }
 
-.menu > li{
+.menu  li{
     position: relative;
     color: var(--textGray);
     list-style-type: none;
@@ -35,12 +35,11 @@
     transition: all 100ms;
     cursor: none;
 }
-
-.menu > li:hover{
+.menu  li:hover{
     color: var(--mainColor);
 }
 
-.menu > li::after{
+.menu  li::after{
     content: "";
     position: absolute;
     left: 0;
@@ -54,12 +53,12 @@
     transition: transform 0.5s cubic-bezier(0.8, 0, 0.2, 1);
 }
 
-.menu > li:hover::after{
+.menu  li:hover::after{
     transform: scaleX(1);
     transform-origin: left;
 }
 
-.menu > li:not(:hover)::after {
+.menu  li:not(:hover)::after {
     transform: scaleX(0);
     transform-origin: right; 
 }
@@ -70,7 +69,6 @@
 .side_menu{
     display: none;
 }
-
 /* Tablet SCREEN */
 @media (max-width: 768px){
     .menu{
@@ -205,5 +203,8 @@
     }
     .container{
         width: 100vw;
+    }
+    .side_menu li:hover .bar{
+        width: 0%;
     }
 }

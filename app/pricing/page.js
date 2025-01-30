@@ -1,6 +1,11 @@
+import Topic from "@/components/Topic"
+
 function page() {
   return (
-    <div>pricing</div>
+    <div>
+      <Topic title="SERVICES & PRICE"/>
+      
+    </div>
   )
 }
 

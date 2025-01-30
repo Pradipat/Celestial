@@ -1,0 +1,27 @@
+@keyframes fadeInUp {
+    0%{
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation: fadeInUp 0.5s ease-in-out forwards;
+    opacity: 0;
+}
+.delay1 {
+    opacity: 0;
+    animation-delay: 0.15s;
+}
+.delay2 {
+    opacity: 0;
+    animation-delay: 0.3s;
+}
+.delay3 {
+    opacity: 0;
+    animation-delay: 0.45s;
+}

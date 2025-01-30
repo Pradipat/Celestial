@@ -134,4 +134,7 @@
   .left .item{
     min-width: 120px;
   }
+  .container{
+    margin-top: 50px;
+  }
 }

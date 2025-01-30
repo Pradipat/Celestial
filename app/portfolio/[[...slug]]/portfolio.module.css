@@ -1,0 +1,44 @@
+/* Type container */
+.type_container{
+    display: flex;
+    gap: calc(0.02083333333 * 100vw);
+    margin: 0 auto;
+    width: max-content;
+    margin-bottom: 50px;
+}
+.type_item{
+    width: max-content;
+    padding: 7px 25px;
+    border: 1px solid var(--mainColor2);
+    border-radius: 5010000px;
+    color: var(--mainColor2);
+    font-size: var(--textNormal);
+}
+.type_item_active{
+    background: linear-gradient(180deg, rgba(197,186,255,1) 0%, rgba(197,186,255,1) 40%, rgba(196,217,255,1) 100%);
+    color: var(--background);
+    border: 0px solid var(--mainColor2);
+}
+
+/* Taplet SCREEN */
+@media (max-width: 768px){
+  }
+  
+  /* Mobile SCREEN */
+  @media (max-width: 480px){
+    .type_container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: calc(0.02083333333 * 100vw);
+        margin: 0 auto;
+        width: 80%;
+        margin-bottom: 0px;
+    }
+    .type_item{
+        width: max-content;
+        padding: 5px 18px;
+        font-size: 12px;
+    }
+  }

@@ -4,6 +4,7 @@ import { useHover } from "@/contexts/HoverContext";
 import styles from './home.module.css'
 import ImageSlider from "@/components/ImageSlider";
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const { setIsHovered } = useHover();
@@ -46,7 +47,7 @@ export default function Home() {
       const offsetYreverse = (clientY - innerHeight / 2) * 0.025;
   
       setBlob1Pos({ x: offsetX , y: offsetY });
-      setBlob2Pos({ x: offsetXreverse * 0.2, y: offsetYreverse * 0.2 });
+      setBlob2Pos({ x: offsetXreverse, y: offsetYreverse });
       setBlob3Pos({ x: offsetX * 0.4, y: offsetY * 0.4 });
     };
 

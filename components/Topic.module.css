@@ -1,0 +1,41 @@
+.topicText {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    width: max-content
+}
+.topicText > div{
+    font-size: var(--textMain);
+    font-weight: bold;
+    color: var(--mainColor);
+    text-align: center;
+    text-transform: uppercase;
+    opacity: 0;
+}
+.topicText > img{
+    position: absolute;
+    left: -15%;
+    top: -20%;
+    z-index: -1;
+}
+
+/* Taplet SCREEN */
+@media (max-width: 768px){
+    .topicText >div{
+        font-size: 36px;
+    }
+    .topicText > img{
+        scale: 0.8;
+    }
+  }
+  
+  /* Mobile SCREEN */
+  @media (max-width: 480px){
+    .topicText >div{
+        font-size: 28px;
+    }
+    .topicText > img{
+        scale: 0.6;
+    }
+  }
