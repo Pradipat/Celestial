@@ -1,0 +1,140 @@
+/* Table Section */
+.tableContainer{
+    margin-top: 50px;
+}
+.tableHeader, .tableRow {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    padding: 20px 15px;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tableHeader {
+    font-size: var(--textSub);
+    color: var(--mainColor2);
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 2px solid var(--mainColor2);
+}
+
+.tableRow {
+    font-size: var(--textNormal);
+    color: var(--textGray);
+    border-bottom: 1px solid var(--subColor);
+}
+
+/* Additional Charge Section */
+.note {
+    font-size: 14px;
+    color: var(--textGray);
+    width: max-content;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.note_topic{
+    text-align: center;
+    color: var(--mainColor2);
+    font-weight: bold;
+    margin-bottom: 13px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.note li{
+    text-align: left;
+    list-style-type: circle;
+    color: var(--textGray);
+    margin-top: 5px;
+}
+
+/* Process Section */
+.process_section{
+    display: flex;
+    flex-direction: column;
+    gap: 55px
+}
+.process_container{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+}
+.process_number, .process_image, .process_description{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+.process_number_text, .process_image_item, .process_description_text{
+    /* width: 90px; */
+    width: calc(0.0625 * 100vw);
+}   
+.process_line, .space_gap{
+    /* width: 82px; */
+    width: calc(0.05694444444 * 100vw);
+    height: 1px;
+}
+.process_number_text{
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--mainColor);
+    text-align: center;
+    margin-bottom: 25px;
+}
+.process_image_item{
+    height: auto;
+}
+.process_description_text{
+    color: var(--textGray);
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* Taplet SCREEN */
+@media (max-width: 768px){
+    .process_number_text{
+        font-size: 16px;
+    }
+    .process_description_text{
+        font-size: 12px;
+    }
+    .process_container{
+        width: 80%;
+    }
+    .note{
+        font-size: 10px;
+    }
+    .tableHeader{
+        font-size: 14px;
+    }
+    .tableRow{
+        font-size: 12px;
+    }
+}
+  
+/* Mobile SCREEN */
+@media (max-width: 480px){
+    .process_number_text{
+        font-size: 11px;
+    }
+    .process_description_text{
+        font-size: 8px;
+    }
+    .process_image_item{
+        width: 30px;
+    }
+    .note{
+        font-size: 8px;
+    }
+    .tableHeader{
+        font-size: 10px;
+    }
+    .tableRow{
+        font-size: 8px;
+    }
+}
