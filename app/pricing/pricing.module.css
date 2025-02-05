@@ -1,6 +1,7 @@
 /* Table Section */
 .tableContainer{
     margin-top: 50px;
+    opacity: 0;
 }
 .tableHeader, .tableRow {
     display: grid;
@@ -33,6 +34,7 @@
     width: max-content;
     margin: 0 auto;
     margin-top: 50px;
+    opacity: 0;
 }
 .note_topic{
     text-align: center;
@@ -53,7 +55,7 @@
 .process_section{
     display: flex;
     flex-direction: column;
-    gap: 55px
+    gap: 55px;
 }
 .process_container{
     display: flex;
@@ -95,6 +97,38 @@
     font-size: 16px;
 }
 
+.delay1{
+    animation-delay: 0.15s;
+    opacity: 0;
+}
+.delay2{
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+.delay3{
+    animation-delay: 0.45s;
+    opacity: 0;
+}
+.delay4{
+    animation-delay: 0.6s;
+    opacity: 0;
+}
+.delay5{
+    animation-delay: 0.75s;
+    opacity: 0;
+}
+.delay6{
+    animation-delay: 0.9s;
+    opacity: 0;
+}
+.delay7{
+    animation-delay: 1.05s;
+    opacity: 0;
+}
+.delay8{
+    animation-delay: 1.2s;
+    opacity: 0;
+}
 /* Taplet SCREEN */
 @media (max-width: 768px){
     .process_number_text{

@@ -1,0 +1,21 @@
+.tos_section{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 75%;
+    max-width: 1080px;
+    margin: 0 auto;
+    margin-top: 80px;
+}
+.tos_container ul {
+    font-size: var(--textNormal);
+    font-weight: bold;
+    color: var(--mainColor);
+    margin-bottom: 8px;
+}
+.tos_container li{
+    color: var(--textGray);
+}
+.tos_container li::marker{
+    margin-right: 0;
+}
