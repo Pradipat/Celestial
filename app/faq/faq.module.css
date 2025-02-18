@@ -38,7 +38,7 @@
     width: 100%;  
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.25s ease-in-out;
+    transition: all 0.25s linear;
 }
 .question_text2{
     padding: 20px 0px;
