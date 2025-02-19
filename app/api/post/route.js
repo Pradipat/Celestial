@@ -2,8 +2,11 @@ import { NextResponse } from "next/server";
 import connectDB from "@/utils/db";
 import Portfolio from "@/models/Portfolio";
 import cloudinary from "@/utils/cloudinary";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET() {
+
     try {
       await connectDB();
       const portfolios = await Portfolio.find().sort({ createdAt: -1 });
@@ -15,6 +18,12 @@ export async function GET() {
   }
 
 export async function POST(req) {
+    const session = await getServerSession(authOptions);
+
+    if (!session || session.user.role !== "admin") {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    }
+
   try {
     await connectDB();
 
@@ -39,6 +48,12 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
+    const session = await getServerSession(authOptions);
+
+    if (!session || session.user.role !== "admin") {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    }
+
     try {
       await connectDB();
       const { id, newImage } = await req.json();
@@ -82,6 +97,12 @@ export async function PUT(req) {
   }
 
 export async function DELETE(req) {
+    const session = await getServerSession(authOptions);
+
+    if (!session || session.user.role !== "admin") {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    }
+    
     try {
         await connectDB();
 

@@ -1,17 +1,75 @@
 "use client";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import  "../globals.css";
 import axios from "axios";
 
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export default function AddProductPage() {
+  return (
+    <ProtectedAdminPage />
+  );
+}
+
+function ProtectedAdminPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  // ✅ รอให้ `useSession()` โหลดก่อน
+  if (status === "loading") return <h1>Loading...</h1>;
+
+  // ✅ ป้องกันผู้ใช้ที่ไม่ได้เป็น Admin เข้าใช้
+  if (!session || session.user.role !== "admin") {
+    return <h1>⛔ Access Denied</h1>;
+  }
+
+  return <AdminContent />;
+}
+
+function AdminContent() {
   const [portfolios, setPortfolios] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newCategory, setNewCategory] = useState("");
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [selectedImageId, setSelectedImageId] = useState(null);
+  const [editingCategory, setEditingCategory] = useState(null);
+  const [newCategoryName, setNewCategoryName] = useState("");
 
-  const handleOpenDeletePopup = (imageId) =>{
+  const handleDoubleClick = (category) => {
+    setEditingCategory(category);
+    setNewCategoryName(category);
+  }
+
+  const handleCategoryUpdate = async () => {
+    if (!newCategoryName || newCategoryName === editingCategory) {
+      setEditingCategory(null);
+      return
+    }
+
+    try{
+      const res = await axios.put("/api/update-category", { 
+        oldCategory: editingCategory,
+        newCategory: newCategoryName
+      })
+
+    if (res.status === 200) {
+      // ✅ อัปเดต Category ใน UI
+      setPortfolios((prevPortfolio) =>
+        prevPortfolio.map((item) =>
+          item.category === editingCategory ? { ...item, category: newCategoryName } : item
+        )
+      )
+    }
+    }catch (error){ 
+      console.error("Error updating Category:", error);
+    }
+
+    setEditingCategory(null);
+  }
+
+  const handleOpenDeletePopup = (imageId) => {
     setSelectedImageId(imageId);
     setShowDeletePopup(true);
   }
@@ -72,7 +130,7 @@ export default function AddProductPage() {
       setLoading(true);
       try {
         const res = await axios.post("/api/post", { category, image: reader.result });
-        setPortfolios([...portfolios, res.data.portfolio]);
+        setPortfolios([res.data.portfolio, ...portfolios]);
       } catch (error) {
         console.error("Error uploading image:", error);
       } finally {
@@ -83,7 +141,6 @@ export default function AddProductPage() {
 
   // ✅ ลบรูปภาพ
   const handleDeleteImage = async (id) => { 
-    console.log("Deleting image with ID:", id); // ✅ Debug ID ก่อนส่ง API
     if (!id) {
         console.error("❌ Error: ID is undefined or null");
         return;
@@ -92,7 +149,6 @@ export default function AddProductPage() {
     setLoading(true);
     try {
       const res = await axios.delete(`/api/post?id=${id}`);
-      console.log("✅ API Response:", res.data);
       
       setPortfolios(portfolios.filter(p => p._id !== id));
     } catch (error) {
@@ -126,7 +182,23 @@ export default function AddProductPage() {
 
       {Object.keys(groupedPortfolios).map((category) => (
         <div key={category} className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">{category}</h2>
+          <h2 className="text-2xl font-semibold mb-4 cursor-pointer"
+            onDoubleClick={() => handleDoubleClick(category)}
+          >
+            {editingCategory === category ? (
+              <input
+                type="text"
+                value={newCategoryName}
+                onChange={(e) => setNewCategoryName(e.target.value)}
+                onBlur={handleCategoryUpdate}
+                onKeyDown={(e) => e.key === "Enter" && handleCategoryUpdate()}
+                className="p-1 border border-gray-300 rounded"
+                autoFocus
+              />
+            ) : (
+              category
+            )}
+          </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {groupedPortfolios[category]
             .filter((item) => item.imageURL)
@@ -192,6 +264,8 @@ export default function AddProductPage() {
           <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
+
+      <button onClick={() => signOut({ callbackUrl: "/admin/login" })}>Logout</button>
     </div>
   );
 }
