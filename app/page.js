@@ -4,10 +4,11 @@ import { useHover } from "@/contexts/HoverContext";
 import styles from './home.module.css'
 import ImageSlider from "@/components/ImageSlider";
 import { useState, useRef, useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { setIsHovered } = useHover();
+  const router = useRouter();
   
   const [contactHovered, setContactHovered] = useState(false);
   const [logoVisibile, setLogoVisible] = useState(false);
@@ -26,6 +27,8 @@ export default function Home() {
   const content2Ref = useRef(null);
   const content3Ref = useRef(null);
   const contactRef = useRef(null);
+
+  const handleContact = () => router.push("/contact");
 
   const handleMouseEnter = () => {
     setContactHovered(true); 
@@ -186,7 +189,7 @@ export default function Home() {
 
       </div>
 
-      <div ref={contactRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+      <div ref={contactRef} onClick={handleContact} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
       className={`${styles.contact} ${contactHovered ? styles.slideIn : styles.slideOut} ${contactVisible ? styles.fadeIn : ''}`}>
         <span>CONTACT</span>
         <svg className={styles.contactArrow} width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">

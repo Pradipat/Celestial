@@ -91,6 +91,13 @@
     display: flex;
     align-items: center;
 }
+.errorBorder{
+    border: 1.5px solid rgba(255, 0, 55, 0.4);
+}
+.errorText{
+    color: rgba(255, 0, 55, 0.4);
+    margin-left: 10px;
+}
 
 /* contact-btn */
 .contact{
