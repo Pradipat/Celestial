@@ -251,8 +251,8 @@ function AdminContent() {
             <p className="text-gray-600">Do you want to DELETE ?</p>
 
             <div className="flex justify-end mt-4">
-              <button onClick={handleCancelDelete} className="bg-red-500 mr-2 p-2 border rounded">Cancel</button>
-              <button onClick={handleConfirmDelete} className="bg-green-500 text-white p-2 rounded">Confirm</button>
+              <button onClick={handleCancelDelete} className="bg-white mr-2 p-2 border rounded">Cancel</button>
+              <button onClick={handleConfirmDelete} className="bg-red-500 text-white p-2 rounded">Confirm</button>
             </div>
           </div>
         </div>
