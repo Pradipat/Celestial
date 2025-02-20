@@ -109,11 +109,11 @@ function Page() {
           </div>
           <div className={styles.process_image}>
             <img className={`${styles.process_image_item} ${styles.delay1} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/1.png" alt="Process" />
-            <img className={styles.process_line} src="/process/line.png" alt="Line" />
+            <img className={styles.process_line} src="/process/Line.png" alt="Line" />
             <img className={`${styles.process_image_item} ${styles.delay2} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/2.png" alt="Process" />
-            <img className={styles.process_line} src="/process/line.png" alt="Line" />
+            <img className={styles.process_line} src="/process/Line.png" alt="Line" />
             <img className={`${styles.process_image_item} ${styles.delay3} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/3.png" alt="Process" />
-            <img className={styles.process_line} src="/process/line.png" alt="Line" />
+            <img className={styles.process_line} src="/process/Line.png" alt="Line" />
             <img className={`${styles.process_image_item} ${styles.delay4} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/4.png" alt="Process" />
           </div>
           <div className={styles.process_description}>
@@ -139,11 +139,11 @@ function Page() {
           </div>
           <div className={styles.process_image}>
             <img className={`${styles.process_image_item} ${styles.delay5} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/5.png" alt="Process" />
-            <img className={styles.process_line} src="/process/line.png" alt="Line" />
+            <img className={styles.process_line} src="/process/Line.png" alt="Line" />
             <img className={`${styles.process_image_item} ${styles.delay6} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/6.png" alt="Process" />
-            <img className={styles.process_line} src="/process/line.png" alt="Line" />
+            <img className={styles.process_line} src="/process/Line.png" alt="Line" />
             <img className={`${styles.process_image_item} ${styles.delay7} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/7.png" alt="Process" />
-            <img className={styles.process_line} src="/process/line.png" alt="Line" />
+            <img className={styles.process_line} src="/process/Line.png" alt="Line" />
             <img className={`${styles.process_image_item} ${styles.delay8} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/8.png" alt="Process" />
           </div>
           <div className={styles.process_description}>
