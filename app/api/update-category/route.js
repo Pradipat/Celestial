@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import connectDB from "@/utils/db";
 import Portfolio from "@/models/Portfolio";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function PUT(req) {
     const session = await getServerSession(authOptions);
