@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDebounce } from "@/utils/hook/useDebounce";
 
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 // 📌 ตัวเลือกสถานะ
 const statusOptions = ["-", "Idea Submission", "Quote and Agreement", "Half Payment", "Sketch Phase",
                        "Coloring Phase", "Final Review", "Final Payment", "Delivered"];
@@ -19,6 +22,27 @@ const statusColors = {
 };
 
 export default function AdminQueuePage() {
+  return (
+    <ProtectedAdminQueuePage />
+  );
+}
+
+function ProtectedAdminQueuePage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  // ✅ รอให้ `useSession()` โหลดก่อน
+  if (status === "loading") return <h1>Loading...</h1>;
+
+  // ✅ ป้องกันผู้ใช้ที่ไม่ได้เป็น Admin เข้าใช้
+  if (!session || session.user.role !== "admin") {
+    return <h1>⛔ Access Denied</h1>;
+  }
+
+  return <AdminQueuePageContent />;
+}
+
+function AdminQueuePageContent() {
   const [queue, setQueue] = useState({});
   const [loading, setLoading] = useState(true);
   const [editedQueue, setEditedQueue] = useState({}); // บันทึกข้อมูลที่แก้ไขก่อนส่ง API
