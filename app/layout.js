@@ -1,5 +1,3 @@
-'use client';
-
 import { Arimo } from 'next/font/google'
 import './globals.css'
 import { HoverProvider } from '@/contexts/HoverContext';
@@ -12,6 +10,16 @@ const arimo = Arimo({
   subsets: ['latin'],
   weight: '400',
 })
+
+export const metadata = {
+  title: "Celestial",
+  description: "Celestial",
+  icons: {
+    icon: "/favicon.ico", // ✅ สำหรับทุก Browser
+    shortcut: "/favicon.ico", // ✅ สำหรับบาง Browser ที่ต้องใช้ shortcut
+    apple: "/favicon.ico", // ✅ สำหรับ iPhone & iPad
+  },
+};
 
 export default function DashboardLayout({ children }) {
 

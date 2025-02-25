@@ -108,7 +108,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 1000;
+    border-radius: 1000px;
     margin: 0 auto;
     overflow: hidden;
     margin-top: 100px;
@@ -186,6 +186,43 @@
         transform: translateX(0px);
         opacity: 1;
     }
+}
+
+/* contact-btn */
+.other_contact_container{
+    width: max-content;
+    margin: 0 auto;
+    font-size: var(--textNormal);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 80px;
+}
+
+.other_contact_topic{
+    color: var(--mainColor);
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 17px;
+}
+
+.other_contact_text{
+    text-align: center;
+    color: var(--textGray);
+    width: 600px;
+}
+
+.other_contact_btn{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.other_contact_img_container{
+    margin-top: 25px;
+    display: flex;
+    gap: 30%;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Taplet SCREEN */

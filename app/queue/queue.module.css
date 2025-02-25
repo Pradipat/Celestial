@@ -1,0 +1,65 @@
+/* Table Section */
+.queue_container{
+    margin-bottom: 50px;
+}
+.month{
+    color: var(--mainColor);
+    font-size: var(--textMain2);
+    font-weight: bold;
+    text-align: center;
+}
+.month_detail{
+    color: var(--textGray);
+    font-size: var(--textNormal);
+    text-align: center;
+}
+.tableContainer{
+    margin-top: 10px;
+    opacity: 0;
+}
+.tableHeader, .tableRow {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    padding: 15px 15px;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tableHeader {
+    font-size: 18px;
+    color: var(--mainColor2);
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 2.5px solid var(--mainColor2);
+}
+
+.tableRow {
+    font-size: var(--textNormal);
+    color: var(--textGray);
+    border-bottom: 1px solid var(--subColor);
+}
+.detail{
+    text-align:center;
+}
+
+/* Taplet SCREEN */
+@media (max-width: 768px){
+    .tableHeader{
+        font-size: 14px;
+    }
+    .tableRow{
+        font-size: 12px;
+    }
+}
+  
+/* Mobile SCREEN */
+@media (max-width: 480px){
+    .tableHeader{
+        font-size: 10px;
+    }
+    .tableRow{
+        font-size: 8px;
+    }
+}

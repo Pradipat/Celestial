@@ -22,6 +22,7 @@ function header() {
             <Link href="/" style={{ textDecoration: 'none' }}><li onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>HOME</li></Link>
             <Link href="/portfolio" style={{ textDecoration: 'none' }}><li onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>PORTFOLIO</li></Link>
             <Link href="/pricing" style={{ textDecoration: 'none' }}><li onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>PRICING</li></Link>
+            <Link href="/queue" style={{ textDecoration: 'none' }}><li onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>QUEUE</li></Link>
             <Link href="/tos" style={{ textDecoration: 'none' }}><li onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>TOS</li></Link>
             <Link href="/faq" style={{ textDecoration: 'none' }}><li onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>FAQS</li></Link>
             <Link href="/contact" style={{ textDecoration: 'none' }}><li onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>CONTACT</li></Link>
@@ -39,6 +40,7 @@ function header() {
             <Link href="/" style={{ textDecoration: 'none' }}><li onClick={() => setShowSideMenu(false)} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>HOME<div className={styles.bar}></div></li></Link>
             <Link href="/portfolio" style={{ textDecoration: 'none' }}><li onClick={() => setShowSideMenu(false)} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>PORTFOLIO<div className={styles.bar}></div></li></Link>
             <Link href="/pricing" style={{ textDecoration: 'none' }}><li onClick={() => setShowSideMenu(false)} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>PRICING<div className={styles.bar}></div></li></Link>
+            <Link href="/queue" style={{ textDecoration: 'none' }}><li onClick={() => setShowSideMenu(false)} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>QUEUE<div className={styles.bar}></div></li></Link>
             <Link href="/tos" style={{ textDecoration: 'none' }}><li onClick={() => setShowSideMenu(false)} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>TOS<div className={styles.bar}></div></li></Link>
             <Link href="/faq" style={{ textDecoration: 'none' }}><li onClick={() => setShowSideMenu(false)} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>FAQS<div className={styles.bar}></div></li></Link>
             <Link href="/contact" style={{ textDecoration: 'none' }}><li onClick={() => setShowSideMenu(false)} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>CONTACT<div className={styles.bar}></div></li></Link>

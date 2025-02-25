@@ -107,6 +107,51 @@ function page() {
   const handleMouseLeave = () => {
     setContactHovered(false); 
   };
+
+  const handleCopyFormat = () => {
+    // ✅ ตรวจสอบฟิลด์ที่ว่าง
+    const newErrors = {};
+
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] === "" || formData[key] === null) {
+        if (key !== "agreement") newErrors[key] = "This field is required.";
+      }
+    });
+
+    // 📌 ถ้ามีฟิลด์ที่ผิดพลาด → แจ้งเตือนและไม่ส่งฟอร์ม
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setStatus("❌ Please fill in all required fields.");
+      console.log(status);
+      return;
+    }
+  
+    // ✅ สร้างข้อความจากข้อมูลในฟอร์ม
+    const orderText = `
+      📌 **Commission Request**
+      👤 Name: ${formData.name}
+      📧 Email: ${formData.email}
+      📱 Preferred Contact: ${formData.contactMethod}
+      🎨 Scale: ${formData.scale}
+      📏 Size: ${formData.size}
+      🖼 Background: ${formData.background}
+      👥 Number of Characters: ${formData.numCharacters}
+      ⏳ Deadline: ${formData.deadline}
+      📌 Intended Use: ${formData.intendedUse}
+      📝 Description:
+      ${formData.description}
+      
+      ✅ I have read and accepted the terms.
+        `;
+  
+    // ✅ คัดลอกไปยัง Clipboard
+    navigator.clipboard.writeText(orderText).then(() => {
+      alert("✅ Format copied! You can now paste it anywhere.");
+    }).catch((err) => {
+      console.error("❌ Failed to copy:", err);
+    });
+  };
+
   return (
     <div>
         {/* Form Section */}
@@ -220,7 +265,7 @@ function page() {
           </ul>
           <div className={styles.checkbox}><input onChange={handleChange} checked={formData.agreement} type="checkbox" name="agreement" required/><span>I confirm that I have <span  className={styles.hight_light}>read</span> and <span  className={styles.hight_light}>accept</span> the <span>terms</span></span>{errors.agreement && <p className={`${styles.errorText}`}>❌ You must accept the agreement before submitting.</p>}</div>
           <div className={styles.copy_container}>
-            <span className={styles.copy}>Copy order</span>
+            <span onClick={handleCopyFormat} className={styles.copy}>Copy order</span>
             <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.1053 1H4.15789C3.52105 1 3 1.57273 3 2.27273V11.1818H4.15789V2.27273H11.1053V1ZM12.8421 3.54545H6.47368C5.83684 3.54545 5.31579 4.11818 5.31579 4.81818V13.7273C5.31579 14.4273 5.83684 15 6.47368 15H12.8421C13.4789 15 14 14.4273 14 13.7273V4.81818C14 4.11818 13.4789 3.54545 12.8421 3.54545ZM12.8421 13.7273H6.47368V4.81818H12.8421V13.7273Z" fill="#C5BAFF"/></svg>
           </div>
         </div>
@@ -231,6 +276,18 @@ function page() {
           <svg className={styles.contactArrow} width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 1C1 1 18 9.80488 18 10.2683C18 10.7317 1 20 1 20"  strokeWidth="1.6" strokeLinecap="round"/>
           </svg>
+        </div>
+
+        <div className={styles.other_contact_container}>
+          <p className={styles.other_contact_topic}>For other contact method</p>
+          <p className={styles.other_contact_text}>"For another platform, 
+          please use the format above or <span className={styles.other_contact_btn} onClick={handleCopyFormat}>[Copy order]</span> and send to my social media. 
+          I’ll review your request and get back to you as soon as possible."</p>
+          <div className={styles.other_contact_img_container}>
+            <img onClick={() => window.open("https://x.com/PatChan_26", "_blank")} src='/contact/Facebook_Contact.png' alt='facebook'></img>
+            <img onClick={() => window.open("https://x.com/PatChan_26", "_blank")} src='/contact/X_Contact.png' alt='x'></img>
+            <img onClick={() => window.open("https://x.com/PatChan_26", "_blank")} src='/contact/IG_Contact.png' alt='ig'></img>
+          </div>
         </div>
     </div>
   )
