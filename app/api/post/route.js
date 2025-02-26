@@ -6,7 +6,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET() {
-
     try {
       await connectDB();
       const portfolios = await Portfolio.find().sort({ createdAt: -1 });

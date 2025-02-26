@@ -56,12 +56,14 @@ function AdminQueuePageContent() {
       try {
         const res = await axios.get("/api/queue/get-all");
         const groupedQueue = res.data.queues.reduce((acc, item) => {
-          if (!acc[item.month]) acc[item.month] = [];
-          acc[item.month] = [...acc[item.month], ...item.orders]; // รวม order เข้าไปในแต่ละเดือน
+          acc[item.month] = {
+            isOpen: item.isOpen,
+            orders: item.orders,
+          };
           return acc;
         }, {});
-
         setQueue(groupedQueue);
+
 
         // ✅ สร้าง newOrders โดยใช้โครงสร้างเดียวกับ groupedQueue
         const initialNewOrders = {};
@@ -94,7 +96,7 @@ function AdminQueuePageContent() {
       if (res.status === 200) {
         setQueue((prevQueue) => ({
           ...prevQueue,
-          [newMonth]: [], // สร้างเดือนใหม่ที่ไม่มีคิว
+          [newMonth]: { isOpen: true, order: []}, // สร้างเดือนใหม่ที่ไม่มีคิว
         }));
 
         // ✅ เพิ่มค่าเริ่มต้นใน newOrders สำหรับเดือนใหม่
@@ -119,9 +121,11 @@ function AdminQueuePageContent() {
   const handleChange = (orderId, month, field, value) => {
     setQueue((prevQueue) => {
       const updatedQueue = { ...prevQueue };
-      updatedQueue[month] = updatedQueue[month].map((item) =>
-        item._id === orderId ? { ...item, [field]: value } : item
-      );
+      if(updatedQueue[month]?.orders){
+        updatedQueue[month].orders = updatedQueue[month].orders.map((item) =>
+          item._id === orderId ? { ...item, [field]: value } : item
+        );
+      }
       return updatedQueue;
     });
 
@@ -152,6 +156,23 @@ function AdminQueuePageContent() {
     });
   }, [debouncedQueue]);
 
+  // ✅ Function to toggle commission mode (open/close)
+  const handleToggleCommission = async (month) => {
+    const currentIsOpen = queue[month].isOpen;
+    try {
+      const res = await axios.patch("/api/queue/update-status", { month, isOpen: !currentIsOpen });
+      if (res.status === 200) {
+
+        setQueue((prevQueue) => ({
+          ...prevQueue,
+          [month]: { ...prevQueue[month], isOpen: res.data.queue.isOpen },
+        }));
+      }
+    } catch (error) {
+      console.error("Error toggling commission mode:", error.response?.data || error.message);
+    }
+  };
+
   // ✅ เพิ่ม Queue รายบุคคล
   const handleAddOrder = async (month) => {
     if (!month) return;
@@ -176,7 +197,10 @@ function AdminQueuePageContent() {
         // ✅ อัปเดต UI โดยเพิ่มข้อมูลใหม่เข้าไปใน State
         setQueue((prevQueue) => ({
           ...prevQueue,
-          [month]: [...(prevQueue[month] || []), newOrder], 
+          [month]: {
+            ...prevQueue[month],
+            orders: [...(prevQueue[month]?.orders || []), newOrder],
+          },
         }));
   
         // ✅ รีเซ็ตค่า input เป็นค่าว่างหลังจากเพิ่ม
@@ -206,7 +230,10 @@ function AdminQueuePageContent() {
         // อัปเดต UI: ลบ order ที่ถูกลบออกจาก state queue
         setQueue((prevQueue) => ({
           ...prevQueue,
-          [month]: prevQueue[month].filter((item) => item._id !== orderId),
+          [month]: {
+            ...prevQueue[month],
+            orders: prevQueue[month].orders.filter((item) => item._id !== orderId),
+          },
         }));
       }
     } catch (error) {
@@ -231,12 +258,7 @@ function AdminQueuePageContent() {
     } catch (error) {
       console.error("❌ Error deleting month:", error);
     }
-  };
-
-  const TestLog = () => {
-    console.log(newOrders)
-  }
-  
+  };  
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -249,6 +271,16 @@ function AdminQueuePageContent() {
           <div key={month} className="mb-8">
             <div className="flex gap-2 items-center mb-4">
               <h2 className="text-2xl font-semibold text-gray-700">{month} Queue</h2>
+              {/* Toggle button for commission mode */}
+              <button
+                onClick={() => handleToggleCommission(month)}
+                className={`px-3 py-[1px] rounded ${
+                  queue[month].isOpen ? "bg-green-500 hover:bg-green-700" : "bg-red-500 hover:bg-red-700"
+                } text-white`}
+              >
+                {queue[month].isOpen ? "Open Commission" : "Close Commission"}
+              </button>
+              {/* Delete button for commission month */}
               <button
                 onClick={() => handleDeleteMonth(month)}
                 className="bg-red-500 text-white px-3 py-[1px] rounded hover:bg-red-700"
@@ -268,7 +300,7 @@ function AdminQueuePageContent() {
                   </tr>
                 </thead>
                 <tbody>
-                  {queue[month].map((item) => (
+                  {queue[month]?.orders?.map((item) => (
                     <tr key={item._id} className="hover:bg-gray-50">
                       <td className="py-3 px-6 border-b">
                         <input
@@ -392,13 +424,6 @@ function AdminQueuePageContent() {
           </button>
         </div>
       </div>
-
-      <button
-        onClick={TestLog}
-        className="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-600"
-      >
-        Log
-      </button>
 
     </div>
   );

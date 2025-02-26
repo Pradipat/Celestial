@@ -1,4 +1,7 @@
 /* Type container */
+.container{
+    min-height: 80vh;
+}
 .type_container{
     display: flex;
     gap: calc(0.02083333333 * 100vw);

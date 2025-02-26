@@ -22,7 +22,8 @@ export async function PATCH(req) {
          // ✅ ค้นหาและอัปเดต `isOpen` ของเดือนนั้น
         const queue = await Queue.findOneAndUpdate(
             { month :month},
-            { $set: { isOpen: isOpen } }
+            { $set: { isOpen: isOpen } },
+            { new: true }
         )
         
         if (!queue) {
