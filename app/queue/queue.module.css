@@ -1,4 +1,7 @@
 /* Table Section */
+.container{
+    min-height: 50vh;
+}
 .queue_container{
     margin-bottom: 50px;
 }
@@ -7,6 +10,7 @@
     font-size: var(--textMain2);
     font-weight: bold;
     text-align: center;
+    opacity: 0;
 }
 .month_detail{
     color: var(--textGray);

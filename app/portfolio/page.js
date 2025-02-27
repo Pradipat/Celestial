@@ -44,7 +44,7 @@ export default function Page({ params }) {
             // ✅ Add "All" category first
             const uniqueCategories = [
               "All",
-              ...new Set(res.data.portfolios.map((item) => item.category))
+              ...[...new Set(res.data.portfolios.map((item) => item.category))].sort()
             ];
             setCategories(uniqueCategories);
           } catch(error) {
@@ -69,7 +69,7 @@ export default function Page({ params }) {
                         onClick={() => setSelectedCategory(category)}
                         style={{ cursor: 'pointer' }}
                     >
-                        {category?.replace("-", " ")}
+                        {category}
                     </div>
                 ))}
             </div>

@@ -35,6 +35,7 @@ function ImageGridContainer({category}) {
   useEffect(() => {
     const fetchPortfolios = async () => {
       try{
+        setLoading(true)
         const res = await axios.get("/api/post")
         setPortfolios(res.data.portfolios);
 
@@ -62,22 +63,33 @@ function ImageGridContainer({category}) {
             <span>{category}</span>
         </div>
 
-        <div className={`${styles.Grid_container} ${stylesAni.delay2} ${isVisible ? stylesAni.fadeIn : ''}`}>
-          {portfolios
-            .filter(portfolio => portfolio.category === category)
-            .map(filteredImage => (
+        {loading ? (
+          <div className={`${styles.Grid_container}`}>
               <img
-                key={filteredImage._id}
-                src={filteredImage.imageURL}
-                alt={filteredImage.category}
+                src={"https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"}
+                alt="loading.."
                 className={`${styles.Grid_item}`}/>
-          ))}
         </div>
+        ) : (
+          <div>
+            <div className={`${styles.Grid_container} ${stylesAni.delay2} ${isVisible ? stylesAni.fadeIn : ''}`}>
+            {portfolios
+              .filter(portfolio => portfolio.category === category)
+              .map(filteredImage => (
+                <img
+                  key={filteredImage._id}
+                  src={filteredImage.imageURL}
+                  alt={filteredImage.category}
+                  className={`${styles.Grid_item}`}/>
+            ))}
+          </div>
 
-        <div className={`${styles.zoom_image_container}`}>
-          <div className={styles.zoom_image_close}></div>
-          <img src="/heroImg.png" alt="image" className={`${styles.zoom_image_item}`}/>
+          <div className={`${styles.zoom_image_container}`}>
+            <div className={styles.zoom_image_close}></div>
+            <img src="/heroImg.png" alt="image" className={`${styles.zoom_image_item}`}/>
+          </div>
         </div>
+        )}
 
     </div>
   )
