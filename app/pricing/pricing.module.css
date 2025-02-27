@@ -56,6 +56,7 @@
     display: flex;
     flex-direction: column;
     gap: 55px;
+    opacity: 1;
 }
 .process_container{
     display: flex;
@@ -74,6 +75,7 @@
 .process_number_text, .process_image_item, .process_description_text{
     /* width: 90px; */
     width: calc(0.0625 * 100vw);
+    opacity: 0;
 }   
 .process_line, .space_gap{
     /* width: 82px; */

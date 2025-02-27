@@ -35,9 +35,8 @@ function Page() {
   ];
 
   const [isPriceVisible, setIsPriceVisible] = useState(false);
+  const [visibleSteps, setVisibleSteps] = useState([]);
   const priceRef = useRef(null);
-
-  const [isProcessVisible, setIsProcessVisible] = useState(false);
   const processRef = useRef(null);
 
   useEffect(() => {
@@ -49,7 +48,12 @@ function Page() {
             observer.unobserve(priceRef.current);
           }
           if (entry.target === processRef.current && entry.isIntersecting) {
-            setIsProcessVisible(true);
+            setVisibleSteps([]);
+            entry.target.querySelectorAll(".process-step").forEach((step, index) => {
+              setTimeout(() => {
+                setVisibleSteps((prev) => [...prev, index + 1]);
+              }, index * 150); // ✅ Delay each step by 300ms
+            });
             observer.unobserve(processRef.current);
           }
         });
@@ -99,61 +103,61 @@ function Page() {
       <div ref={processRef} className={`${styles.process_section}`}>
         <div className={styles.process_container}>
           <div className={styles.process_number}>
-            <div className={`${styles.process_number_text} ${styles.delay1} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>1</div>
+            <div className={`process-step ${styles.process_number_text} ${visibleSteps.includes(1) ? stylesAni.fadeIn : ''}`}>1</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_number_text} ${styles.delay2} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>2</div>
+            <div className={`process-step ${styles.process_number_text} ${visibleSteps.includes(2) ? stylesAni.fadeIn : ''}`}>2</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_number_text} ${styles.delay3} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>3</div>
+            <div className={`process-step ${styles.process_number_text} ${visibleSteps.includes(3) ? stylesAni.fadeIn : ''}`}>3</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_number_text} ${styles.delay4} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>4</div>
+            <div className={`process-step ${styles.process_number_text} ${visibleSteps.includes(4) ? stylesAni.fadeIn : ''}`}>4</div>
           </div>
           <div className={styles.process_image}>
-            <img className={`${styles.process_image_item} ${styles.delay1} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/1.png" alt="Process" />
+            <img className={`process-step ${styles.process_image_item} ${visibleSteps.includes(1) ? stylesAni.fadeIn : ''}`} src="/process/1.png" alt="Process" />
             <img className={styles.process_line} src="/process/Line.png" alt="Line" />
-            <img className={`${styles.process_image_item} ${styles.delay2} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/2.png" alt="Process" />
+            <img className={`process-step ${styles.process_image_item} ${visibleSteps.includes(2) ? stylesAni.fadeIn : ''}`} src="/process/2.png" alt="Process" />
             <img className={styles.process_line} src="/process/Line.png" alt="Line" />
-            <img className={`${styles.process_image_item} ${styles.delay3} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/3.png" alt="Process" />
+            <img className={`process-step ${styles.process_image_item} ${visibleSteps.includes(3) ? stylesAni.fadeIn : ''}`} src="/process/3.png" alt="Process" />
             <img className={styles.process_line} src="/process/Line.png" alt="Line" />
-            <img className={`${styles.process_image_item} ${styles.delay4} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/4.png" alt="Process" />
+            <img className={`process-step ${styles.process_image_item} ${visibleSteps.includes(4) ? stylesAni.fadeIn : ''}`} src="/process/4.png" alt="Process" />
           </div>
           <div className={styles.process_description}>
-            <div className={`${styles.process_description_text} ${styles.delay1} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>Idea Submission</div>
+            <div className={`process-step ${styles.process_description_text} ${visibleSteps.includes(1) ? stylesAni.fadeIn : ''}`}>Idea Submission</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_description_text} ${styles.delay2} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>Quote and Agreement</div>
+            <div className={`process-step ${styles.process_description_text} ${visibleSteps.includes(2) ? stylesAni.fadeIn : ''}`}>Quote and Agreement</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_description_text} ${styles.delay3} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>Deposit and Payment</div>
+            <div className={`process-step ${styles.process_description_text} ${visibleSteps.includes(3) ? stylesAni.fadeIn : ''}`}>Deposit and Payment</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_description_text} ${styles.delay4} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>Sketch Phase</div>
+            <div className={`process-step ${styles.process_description_text} ${visibleSteps.includes(4) ? stylesAni.fadeIn : ''}`}>Sketch Phase</div>
           </div>
         </div>
 
         <div className={styles.process_container}>
           <div className={styles.process_number}>
-            <div className={`${styles.process_number_text} ${styles.delay5} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>5</div>
+            <div className={`process-step ${styles.process_number_text} ${visibleSteps.includes(5) ? stylesAni.fadeIn : ''}`}>5</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_number_text} ${styles.delay6} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>6</div>
+            <div className={`process-step ${styles.process_number_text} ${visibleSteps.includes(6) ? stylesAni.fadeIn : ''}`}>6</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_number_text} ${styles.delay7} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>7</div>
+            <div className={`process-step ${styles.process_number_text} ${visibleSteps.includes(7) ? stylesAni.fadeIn : ''}`}>7</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_number_text} ${styles.delay8} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>8</div>
+            <div className={`process-step ${styles.process_number_text} ${visibleSteps.includes(8) ? stylesAni.fadeIn : ''}`}>8</div>
           </div>
           <div className={styles.process_image}>
-            <img className={`${styles.process_image_item} ${styles.delay5} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/5.png" alt="Process" />
+            <img className={`process-step ${styles.process_image_item} ${visibleSteps.includes(5) ? stylesAni.fadeIn : ''}`} src="/process/5.png" alt="Process" />
             <img className={styles.process_line} src="/process/Line.png" alt="Line" />
-            <img className={`${styles.process_image_item} ${styles.delay6} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/6.png" alt="Process" />
+            <img className={`process-step ${styles.process_image_item} ${visibleSteps.includes(6) ? stylesAni.fadeIn : ''}`} src="/process/6.png" alt="Process" />
             <img className={styles.process_line} src="/process/Line.png" alt="Line" />
-            <img className={`${styles.process_image_item} ${styles.delay7} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/7.png" alt="Process" />
+            <img className={`process-step ${styles.process_image_item} ${visibleSteps.includes(7) ? stylesAni.fadeIn : ''}`} src="/process/7.png" alt="Process" />
             <img className={styles.process_line} src="/process/Line.png" alt="Line" />
-            <img className={`${styles.process_image_item} ${styles.delay8} ${isProcessVisible ? stylesAni.fadeIn : ''}`} src="/process/8.png" alt="Process" />
+            <img className={`process-step ${styles.process_image_item} ${visibleSteps.includes(8) ? stylesAni.fadeIn : ''}`} src="/process/8.png" alt="Process" />
           </div>
           <div className={styles.process_description}>
-            <div className={`${styles.process_description_text} ${styles.delay5} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>Coloring Phase</div>
+            <div className={`process-step ${styles.process_description_text} ${visibleSteps.includes(5) ? stylesAni.fadeIn : ''}`}>Coloring Phase</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_description_text} ${styles.delay6} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>Final Review</div>
+            <div className={`process-step ${styles.process_description_text} ${visibleSteps.includes(6) ? stylesAni.fadeIn : ''}`}>Final Review</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_description_text} ${styles.delay7} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>Final Payment</div>
+            <div className={`process-step ${styles.process_description_text} ${visibleSteps.includes(7) ? stylesAni.fadeIn : ''}`}>Final Payment</div>
             <div className={styles.space_gap}></div>
-            <div className={`${styles.process_description_text} ${styles.delay8} ${isProcessVisible ? stylesAni.fadeIn : ''}`}>Delivery</div>
+            <div className={`process-step ${styles.process_description_text} ${visibleSteps.includes(8) ? stylesAni.fadeIn : ''}`}>Delivery</div>
           </div>
         </div>
       </div>
